@@ -76,7 +76,53 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             print("** class name missing **")
-           
+
+    def do_all(self, arg):
+        """Prints all string representation of all instances of class
+        """
+        class_obj = storage.all()
+        arg = arg.split()
+        list_obj = []
+        if len(arg) <= 0:
+            for key in class_obj.keys():
+                list_obj.append(str(class_obj[key]))
+            print(list_obj)
+        elif hasattr(HBNBCommand.__base_module, arg[0]):
+            for key in class_obj.keys():
+                if key.split(".")[0] == arg[0]:
+                    list_obj.append(str(class_obj[key]))
+            print(list_obj)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, args):
+        """This method will update instances and save them
+        """
+        args = args.split()
+        class_obj = storage.all()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        elif len(args) >= 4:
+            if hasattr(HBNBCommand.__base_module, args[0]):
+                key = f"{args[0]}.{args[1]}"
+                class_new = getattr(HBNBCommand.__base_module, args[0])
+                if key in class_obj.keys():
+                    setattr(class_obj[key], args[2], args[3])
+                    #class_obj[key] = class_new()
+                    #print(class_new())
+                    storage.new(class_obj[key])
+                    storage.save()
+                else:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
+        
     def do_quit(self, line):
         """This command quit command interpreter, to quit write quit
         """
