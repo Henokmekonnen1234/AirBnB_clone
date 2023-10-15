@@ -8,12 +8,15 @@ This code contains method usefull for file storage
 import importlib
 import json
 
+
 class FileStorage:
-    """This class contains methods for serializing and deserializing objects to/from JSON.
+    """This class contains methods for serializing and deserializing
+    objects to/from JSON.
 
     Attributes:
         __file_path (str): Path to the JSON file.
-        __objects (dict): A dictionary to store objects with the format <class name>.id.
+        __objects (dict): A dictionary to store objects with the
+                          format <class name>.id.
     """
     __file_path = "file.json"
     __objects = {}
@@ -32,7 +35,7 @@ class FileStorage:
         Args:
             obj (object): An object to be stored.
         """
-        if type(obj) != dict:
+        if isinstance(type(obj), dict):
             key = f"{obj.__class__.__name__}.{obj.id}"
             FileStorage.__objects[key] = obj
         else:
@@ -60,7 +63,7 @@ class FileStorage:
 
         Args:
             objects (dict): dict contain class instaces
-        
+
         Returns:
             dict: returs dictionary of class instaces
         """
