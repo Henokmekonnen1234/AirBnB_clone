@@ -33,6 +33,7 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance of a class and save it as json file"""
         if self.check_module(class_name.split()):
             class_created = (self.get_attribute(class_name))()
+            print(class_created.id)
             class_created.save()
 
     def do_show(self, args):

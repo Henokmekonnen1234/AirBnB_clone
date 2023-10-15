@@ -35,7 +35,7 @@ class FileStorage:
         Args:
             obj (object): An object to be stored.
         """
-        if isinstance(type(obj), dict):
+        if type(obj) is not dict:
             key = f"{obj.__class__.__name__}.{obj.id}"
             FileStorage.__objects[key] = obj
         else:
@@ -54,9 +54,9 @@ class FileStorage:
                 file = json.load(json_file)
                 FileStorage.__objects = self.dict_to_obj(file)
         except FileNotFoundError as e:
-            print("Error not found", e)
+            pass
         except Exception as e:
-            print("other Exception", e)
+            pass
 
     def obj_to_dict(self, objects):
         """This method will change class object to dictionary
