@@ -12,16 +12,16 @@ import uuid
 
 
 class BaseModel:
-    """This class contains common attributes and methods for 
+    """This class contains common attributes and methods for
         other classes
     """
 
     def __init__(self, *args, **kwargs):
-        """this method will initialize the attributes 
+        """this method will initialize the attributes
 
         Args:
             id (UUID): it's unique identifier for the object
-            created_at (datetime):  assign with the current datetime 
+            created_at (datetime):  assign with the current datetime
                                     when an instance is created
             update_at (datetime): it will be assigned when the object
                                     is changed

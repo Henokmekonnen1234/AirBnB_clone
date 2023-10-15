@@ -39,23 +39,64 @@ class FileStorage:
             FileStorage.__objects = obj
 
     def save(self):
-        """Serializes __objects to a JSON file."""
-        for key in FileStorage.__objects.keys():
-            if hasattr(FileStorage.__objects[key], "to_dict"):
-                FileStorage.__objects[key] = FileStorage.__objects[key].to_dict()
+        """This methos will seriliaze the data and save it to sile
+        """
         with open(FileStorage.__file_path, "w") as json_file:
-            json.dump(FileStorage.__objects, json_file)
+            json.dump(self.obj_to_dict(FileStorage.__objects), json_file)
 
     def reload(self):
         """Deserializes the JSON file to populate the __objects dictionary."""
         try:
             with open(FileStorage.__file_path, "r") as json_file:
                 file = json.load(json_file)
-                for key, value in file.items():
-                    module = importlib.import_module("models.base_model")
-                    class_obj = getattr(module, value["__class__"])
-                    FileStorage.__objects[key] = class_obj(**value)
+                FileStorage.__objects = self.dict_to_obj(file)
         except FileNotFoundError as e:
             print("Error not found", e)
         except Exception as e:
             print("other Exception", e)
+
+    def obj_to_dict(self, objects):
+        """This method will change class object to dictionary
+
+        Args:
+            objects (dict): dict contain class instaces
+        
+        Returns:
+            dict: returs dictionary of class instaces
+        """
+        to_dict = {}
+        for key in objects.keys():
+            to_dict[key] = objects[key].to_dict()
+        return to_dict
+
+    def get_attribute(self, class_name):
+        """it will create class instace
+
+        Args:
+            module (str): module name or file path
+            class_name (str): class name
+
+        Returns:
+            obj: returns the class instance
+        """
+        base_model = importlib.import_module("models.base_model")
+        user = importlib.import_module("models.user")
+        if hasattr(base_model, class_name):
+            return getattr(base_model, class_name)
+        elif hasattr(user, class_name):
+            return getattr(user, class_name)
+
+    def dict_to_obj(self, dict_obj):
+        """checks the class and will set the value
+
+        Args:
+            class_name (str): class name passed from file.json
+
+        Retruns:
+            dict: return dict and set it to private instace objects
+        """
+        to_obj = {}
+        for key, value in dict_obj.items():
+            class_new = self.get_attribute(value["__class__"])
+            to_obj[key] = class_new(**value)
+        return to_obj
