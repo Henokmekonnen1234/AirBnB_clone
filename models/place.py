@@ -6,7 +6,7 @@ This module contains instances of Place class
 """
 
 from models.amenity import Amenity
-from models.base_model import Basemodel
+from models.base_model import BaseModel
 from models.city import City
 
 

@@ -24,6 +24,11 @@ class HBNBCommand(cmd.Cmd):
     __review = importlib.import_module("models.review")
     show_all = storage.all()
 
+    def emptyline(self):
+        """when it's empty line do nothing
+        """
+        pass
+
     def do_create(self, class_name):
         """Creates a new instance of a class and save it as json file"""
         if self.check_module(class_name.split()):
