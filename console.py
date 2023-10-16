@@ -63,20 +63,20 @@ class HBNBCommand(cmd.Cmd):
         arg = arg.split()
         class_list = list(map(lambda key: key.split(".")[0],
                               self.show_all.keys()))
-        list_obj = []
+        self.list_obj = []
         for key in self.show_all.keys():
             if len(arg) >= 1:
                 if arg[0] in class_list:
                     if arg[0] == key.split('.')[0]:
                         key_value = f"{arg[0]}.{key.split('.')[1]}"
-                        list_obj.append(str(HBNBCommand.show_all[key_value]))
+                        self.list_obj.append(str(HBNBCommand.show_all[key_value]))
                 else:
                     print("** class doesn't exist **")
                     break
             else:
-                list_obj.append(str(HBNBCommand.show_all[key]))
-        if len(list_obj) > 0:
-            print(list_obj)
+                self.list_obj.append(str(HBNBCommand.show_all[key]))
+        if len(self.list_obj) > 0:
+            print(self.list_obj)
 
     def do_update(self, args):
         """This method will update instances and save them
@@ -117,6 +117,12 @@ class HBNBCommand(cmd.Cmd):
             elif args[1] == 'show':
                 self.do_show(f"{args[0]} {args[2]}" if len(args) > 2 else
                              f"{args[0]} {''}")
+            elif args[1] == 'count':
+                count = 0
+                for key in self.show_all.keys():
+                    if args[0] == key.split(".")[0]:
+                        count += 1
+                print(count)
 
     def check_module(self, args):
         """This module will check if the class name pressent in the module
@@ -124,30 +130,22 @@ class HBNBCommand(cmd.Cmd):
         Args:
             class_name (str): contain the class name
         """
-        class_list = [self.__base_model, self.__user, self.__place,
-                      self.__state, self.__city, self.__amenity,
-                      self.__review]
+        class_list = [HBNBCommand.__base_model, HBNBCommand.__user,
+                      HBNBCommand.__place, HBNBCommand.__state, 
+                      HBNBCommand.__city, HBNBCommand.__amenity,
+                      HBNBCommand.__review]
         if len(args) <= 0:
             print("** class name missing **")
             return False
-        elif hasattr(HBNBCommand.__base_model, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__user, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__place, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__state, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__city, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__amenity, args[0]):
-            return True
-        elif hasattr(HBNBCommand.__review, args[0]):
-            return True
         else:
-            print("** class doesn't exist **")
-            return False
-
+            for lists in class_list:
+                if hasattr(lists, args[0]):
+                    return True
+                    break
+            else:
+                print("** class doesn't exist **")
+                return False
+                
     def check_id(self, args):
         """This will check if the id present in the instance
 
@@ -179,20 +177,14 @@ class HBNBCommand(cmd.Cmd):
             object : will return instace of class
         """
         args = args.split()
-        if hasattr(HBNBCommand.__base_model, args[0]):
-            return getattr(HBNBCommand.__base_model, args[0])
-        elif hasattr(HBNBCommand.__user, args[0]):
-            return getattr(HBNBCommand.__user, args[0])
-        if hasattr(HBNBCommand.__place, args[0]):
-            return getattr(HBNBCommand.__place, args[0])
-        elif hasattr(HBNBCommand.__city, args[0]):
-            return getattr(HBNBCommand.__city, args[0])
-        elif hasattr(HBNBCommand.__state, args[0]):
-            return getattr(HBNBCommand.__state, args[0])
-        if hasattr(HBNBCommand.__amenity, args[0]):
-            return getattr(HBNBCommand.__amenity, args[0])
-        elif hasattr(HBNBCommand.__review, args[0]):
-            return getattr(HBNBCommand.__review, args[0])
+        class_list = [HBNBCommand.__base_model, HBNBCommand.__user,
+                      HBNBCommand.__place, HBNBCommand.__state,
+                      HBNBCommand.__city, HBNBCommand.__amenity,
+                      HBNBCommand.__review]
+        for lists in class_list:
+            if hasattr(lists, args[0]):
+                return getattr(lists, args[0])
+                break
 
 
 if __name__ == "__main__":
