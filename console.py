@@ -5,9 +5,10 @@ Module console.py
 This module will be described below
 """
 
+from models import storage
 import cmd
 import importlib
-from models import storage
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -61,10 +62,10 @@ class HBNBCommand(cmd.Cmd):
         """
         arg = arg.split()
         class_list = list(map(lambda key: key.split(".")[0],
-                              HBNBCommand.show_all.keys()))
+                              self.show_all.keys()))
         list_obj = []
-        for key in HBNBCommand.show_all.keys():
-            if len(arg) == 1:
+        for key in self.show_all.keys():
+            if len(arg) >= 1:
                 if arg[0] in class_list:
                     if arg[0] == key.split('.')[0]:
                         key_value = f"{arg[0]}.{key.split('.')[1]}"
@@ -102,12 +103,30 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program"""
         return True
 
+    def default(self, line):
+        """this method will execute when the above method are not found
+
+        Args:
+            line (str): passed from command interpreter
+        """
+        args = re.split(r'[("").]', line)
+        args = [items for items in args if items]
+        if len(args) > 1:
+            if args[1] == 'all':
+                self.do_all(args[0])
+            elif args[1] == 'show':
+                self.do_show(f"{args[0]} {args[2]}" if len(args) > 2 else
+                             f"{args[0]} {''}")
+
     def check_module(self, args):
         """This module will check if the class name pressent in the module
 
         Args:
             class_name (str): contain the class name
         """
+        class_list = [self.__base_model, self.__user, self.__place,
+                      self.__state, self.__city, self.__amenity,
+                      self.__review]
         if len(args) <= 0:
             print("** class name missing **")
             return False
