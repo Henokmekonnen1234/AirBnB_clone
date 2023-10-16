@@ -69,7 +69,8 @@ class HBNBCommand(cmd.Cmd):
                 if arg[0] in class_list:
                     if arg[0] == key.split('.')[0]:
                         key_value = f"{arg[0]}.{key.split('.')[1]}"
-                        self.list_obj.append(str(HBNBCommand.show_all[key_value]))
+                        self.list_obj.append(str(HBNBCommand.show_all[
+                                                key_value]))
                 else:
                     print("** class doesn't exist **")
                     break
@@ -109,8 +110,9 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line (str): passed from command interpreter
         """
-        args = re.split(r'[("").]', line)
-        args = [items for items in args if items]
+        args = re.split(r'[("",).]', line)
+        args = [items for items in args if items and items != '' and
+                items != ' ']
         if len(args) > 1:
             if args[1] == 'all':
                 self.do_all(args[0])
@@ -126,6 +128,17 @@ class HBNBCommand(cmd.Cmd):
             elif args[1] == 'destroy':
                 self.do_destroy(f"{args[0]} {args[2]}" if len(args) > 2
                                 else f"{args[0]} {''}")
+            elif args[1] == 'update':
+                value = ""
+                if len(args) <= 2:
+                    value = f"{args[0]} {''}"
+                elif len(args) <= 3:
+                    value = f"{args[0]} {args[2]} {''}"
+                elif len(args) <= 4:
+                    value = f"{args[0]} {args[2]} {args[3]} {''}"
+                else:
+                    value = f"{args[0]} {args[2]} {args[3]} {args[4]}"
+                self.do_update(value)
 
     def check_module(self, args):
         """This module will check if the class name pressent in the module
@@ -134,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
             class_name (str): contain the class name
         """
         class_list = [HBNBCommand.__base_model, HBNBCommand.__user,
-                      HBNBCommand.__place, HBNBCommand.__state, 
+                      HBNBCommand.__place, HBNBCommand.__state,
                       HBNBCommand.__city, HBNBCommand.__amenity,
                       HBNBCommand.__review]
         if len(args) <= 0:
@@ -148,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
                 return False
-                
+
     def check_id(self, args):
         """This will check if the id present in the instance
 
