@@ -123,6 +123,9 @@ class HBNBCommand(cmd.Cmd):
                     if args[0] == key.split(".")[0]:
                         count += 1
                 print(count)
+            elif args[1] == 'destroy':
+                self.do_destroy(f"{args[0]} {args[2]}" if len(args) > 2
+                                else f"{args[0]} {''}")
 
     def check_module(self, args):
         """This module will check if the class name pressent in the module
