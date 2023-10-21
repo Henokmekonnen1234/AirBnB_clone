@@ -4,8 +4,9 @@ body {
     color: #484848;
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
     }
-    
+
     .container {
+        background-color: gray;
         display: flex;
         margin-left: auto;
         margin-right: auto;
