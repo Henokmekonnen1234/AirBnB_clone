@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+.popover-content{
+    background-color: chocolate;
+    display: none;
+    position: absolute;
+    border: 1px;
+    border-color: #DDDDDD;
+    border-radius: 4px;
+}
+
+
+.popover-content h2{
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+.popover-content h3{
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+.popover, .popover-content {
+    list-style-type: none;
+}
+
+.popover:hover .popover-content{
+    display: block;
+}
+
+
+
+<head>
+    <style>
+        /* Remove the default list-style-type */
+        ul {
+            list-style-type: none;
+        }
+
+        /* Style for the main menu */
+        ul.menu {
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Style for the menu items */
+        ul.menu li {
+            display: inline;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Style for the dropdown container */
+        ul.menu li:hover .dropdown {
+            display: block;
+        }
+
+        /* Style for the dropdown menu */
+        ul.menu .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 0;
+        }
+
+        /* Style for the dropdown items */
+        ul.menu .dropdown li {
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<ul class="menu">
+    <li>Home</li>
+    <li>Products
+        <ul class="dropdown">
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>
+        </ul>
+    </li>
+    <li>About</li>
+    <li>Contact</li>
+</ul>
+
+</body>
+</html>
