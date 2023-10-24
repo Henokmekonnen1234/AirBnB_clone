@@ -18,18 +18,22 @@ h1{
 
 article {
     flex: 0 0 auto;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 390px;
     padding: 20px;
     margin: 20px;
     border: 1px solid #ff5A5F; 
+    border-radius: 4px;
 }
 
 article h2 {
     text-align: center;
     font-size: 30px;
     margin-top: 0px;
+    margin-right: 0px;
 }
 
 /* article {

@@ -1,13 +1,19 @@
+
 header {
+    display: flex;
     background-color: white;
     height: 70px;
     width: 100%;
     border-bottom: 1px solid;
     border-color: #CCCCCC;
+    
 }
 
-header.img{
+.image {
+    display: inline;
+    width: 160px;
+    height: 70px;
     float: left;
-    margin-left: 20%;
-    align-items: center;
+    background-image: url('../image/logo.png');
+    background-size: cover; 
 }

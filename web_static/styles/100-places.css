@@ -1,0 +1,88 @@
+.amenities, .reviews{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.amenities h2, .reviews h2 {
+    display: flex;
+    width: 100%;
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 10px;
+}
+
+.amenities ul li h4 {
+    font-size: small;
+    font-weight: 400;
+    font-family: Arial,sans-serif;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.amenities ul, .reviews ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.amenities ul li {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.pet_img, .tv_img, .wifi_img{
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tv_img {
+    background-image: url('../image/icon_tv.png');
+}
+
+.wifi_img {
+    background-image: url('../image/icon_wifi.png');
+}
+
+.pet_img {
+    background-image: url('../image/icon_pets.png');
+}
+
+.reviews h3 {
+    font-size: 14px;
+    width: 100%;
+}
+
+.reviews ul {
+    margin-top: 0px;
+}
+
+.reviews ul li h3, .reviews ul li p {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.reviews ul li h3 {
+    margin-top: 15px;
+}
+
+.reviews ul li p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.reviews ul li {
+    display: flex;
+    flex-direction: column;
+}
