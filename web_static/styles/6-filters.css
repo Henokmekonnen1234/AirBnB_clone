@@ -30,12 +30,12 @@
     
 }
 
-.amenities {
+.filters .amenities {
     margin-right: 268px;
 }
 
 
-.location, .amenities {
+.location, .filters .amenities {
     display: inline-block;
     height: 100%;
     width: 25%;
@@ -43,7 +43,7 @@
     position: relative;
 
 }
-.location h3, .amenities h3 {
+.location h3, .filters .amenities h3 {
     margin-bottom: 0px;
     text-align: center;
     font-weight: 600;
@@ -60,7 +60,7 @@
     font-size: 14px;
 }
 
-.amenitiesh4 {
+.filters .amenitiesh4 {
     margin-top: 0;
     margin-bottom: 0px;
     text-align: left;
@@ -115,7 +115,7 @@ ul, li{
 .location:hover .popover li{
     visibility: visible;
 }
-.amenities:hover .popover li{
+.filters .amenities:hover .popover li{
     visibility: visible;
 }
 
